@@ -22,16 +22,23 @@ provider "aws" {
 }
 
 resource "aws_instance" "openvpn" {
-  ami           = "ami-01016ec4119ab389a"
+  ami           = "ami-05b891753d41ff88f"
   instance_type = "t2.micro"
 
   tags = {
     Name = "OpenVPN"
   }
 
+  connection {
+    type        = "ssh"
+    private_key = file("~/.ssh/id_rsa")
+    host        = self.public_ip
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "echo HIIIIIIIII"
+       "curl -fsSL https://get.docker.com -o get-docker.sh",
+       "sudo sh get-docker.sh"
     ]
   }
 }
