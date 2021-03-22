@@ -10,7 +10,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "dienp"
     workspaces {
-      name = "terraform-infras"
+      name = "vultr-workspace"
     }
 
   }
